@@ -1,0 +1,165 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Layout.master.cs" Inherits="FinalProject.Layout" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <%-- bootstrap--%>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.2.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+
+    <style>
+        ul li a{
+            color:#808080;
+        }
+        ul li a:hover{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Online Job Searching System</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Việc làm IT</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Danh sách top 10 công ty</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="btn btn-secondary">Đăng nhập</a>
+            </li>
+        </ul>
+    </nav>
+    <div style="margin-top: 60px;" class="container">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <footer class="page-footer font-small blue pt-4 fixed-bottom bg-dark text-white">
+
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Việc làm IT theo kỹ năng</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Java</a>
+                        </li>
+                        <li>
+                            <a href="#!">PHP</a>
+                        </li>
+                        <li>
+                            <a href="#!">.NET</a>
+                        </li>
+                        <li>
+                            <a href="#!">Tester</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Việc làm IT theo cấp bậc</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Lập trình viên Back End</a>
+                        </li>
+                        <li>
+                            <a href="#!">Lập trình viên PHP</a>
+                        </li>
+                        <li>
+                            <a href="#!">Lập trình viên iOS</a>
+                        </li>
+                        <li>
+                            <a href="#!">Lập trình viên Java</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Việc làm IT theo thành phố</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Ho Chi Minh</a>
+                        </li>
+                        <li>
+                            <a href="#!">Ha Noi</a>
+                        </li>
+                        <li>
+                            <a href="#!">Da Nang</a>
+                        </li>
+                        <li>
+                            <a href="#!">Others</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Việc làm IT theo công ty</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Techcombank</a>
+                        </li>
+                        <li>
+                            <a href="#!">NashTech</a>
+                        </li>
+                        <li>
+                            <a href="#!">Hahalolo</a>
+                        </li>
+                        <li>
+                            <a href="#!">AXON</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            © 2020 Copyright:
+    <a href="https://mdbootstrap.com/">Online Job Searching System</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+</body>
+</html>
