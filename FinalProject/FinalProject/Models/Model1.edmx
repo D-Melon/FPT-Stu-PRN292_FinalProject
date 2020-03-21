@@ -1,0 +1,885 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Act_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Company_Web" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ID_Location" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fb Detail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Point" Type="float" Nullable="false" />
+          <Property Name="FeedbackID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="JskID" Type="int" Nullable="false" />
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="Titile" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Follow">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="JskID" Type="int" Nullable="false" />
+          <Property Name="EmpID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="SkillID" Type="int" Nullable="false" />
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="PositionID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Short_Des" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Detail" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Salary" Type="float" Nullable="false" />
+          <Property Name="Time" Type="float" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CV_Link" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="SkillID" Type="int" />
+        </EntityType>
+        <EntityType Name="User _Skills">
+          <Key>
+            <PropertyRef Name="JskID" />
+            <PropertyRef Name="skillID" />
+          </Key>
+          <Property Name="JskID" Type="int" Nullable="false" />
+          <Property Name="skillID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_Job">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="JobID" Type="int" Nullable="false" />
+          <Property Name="JskID" Type="int" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Employer_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employer">
+              <PropertyRef Name="ID_Location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_Employer">
+          <End Role="Employer" Type="Self.Employer" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_Fb Detail">
+          <End Role="Fb Detail" Type="Self.Fb Detail" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Fb Detail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="JskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Follow_Employer">
+          <End Role="Employer" Type="Self.Employer" Multiplicity="1" />
+          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Follow">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Follow_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Follow">
+              <PropertyRef Name="JskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User - Skills_Skill1">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="1" />
+          <End Role="User _Skills" Type="Self.User _Skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Skill">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User _Skills">
+              <PropertyRef Name="skillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User - Skills_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User _Skills" Type="Self.User _Skills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User _Skills">
+              <PropertyRef Name="JskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Job_Act_Type">
+          <End Role="Act_Type" Type="Self.Act_Type" Multiplicity="1" />
+          <End Role="User_Job" Type="Self.User_Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Act_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Job">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Job_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="User_Job" Type="Self.User_Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Job">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Job_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Job" Type="Self.User_Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Job">
+              <PropertyRef Name="JskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Act_Type" EntityType="Self.Act_Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employer" EntityType="Self.Employer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fb Detail" EntityType="Self.Fb Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Follow" EntityType="Self.Follow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User _Skills" EntityType="Self.User _Skills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Job" EntityType="Self.User_Job" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employer_Location" Association="Self.FK_Employer_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Employer" EntitySet="Employer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_Employer" Association="Self.FK_Feedback_Employer">
+            <End Role="Employer" EntitySet="Employer" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_Fb Detail" Association="Self.FK_Feedback_Fb Detail">
+            <End Role="Fb Detail" EntitySet="Fb Detail" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_User" Association="Self.FK_Feedback_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Follow_Employer" Association="Self.FK_Follow_Employer">
+            <End Role="Employer" EntitySet="Employer" />
+            <End Role="Follow" EntitySet="Follow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Follow_User" Association="Self.FK_Follow_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Follow" EntitySet="Follow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Location" Association="Self.FK_Job_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Position" Association="Self.FK_Job_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Job" EntitySet="Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User - Skills_Skill1" Association="Self.FK_User - Skills_Skill1">
+            <End Role="Skill" EntitySet="Skill" />
+            <End Role="User _Skills" EntitySet="User _Skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User - Skills_User" Association="Self.FK_User - Skills_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="User _Skills" EntitySet="User _Skills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Job_Act_Type" Association="Self.FK_User_Job_Act_Type">
+            <End Role="Act_Type" EntitySet="Act_Type" />
+            <End Role="User_Job" EntitySet="User_Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Job_Job" Association="Self.FK_User_Job_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="User_Job" EntitySet="User_Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Job_User" Association="Self.FK_User_Job_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Job" EntitySet="User_Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Type" Association="Self.FK_User_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Act_Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User_Job" Relationship="Self.FK_User_Job_Act_Type" FromRole="Act_Type" ToRole="User_Job" />
+        </EntityType>
+        <EntityType Name="Employer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Company_Web" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_Location" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Employer_Location" FromRole="Employer" ToRole="Location" />
+          <NavigationProperty Name="Feedbacks" Relationship="Self.FK_Feedback_Employer" FromRole="Employer" ToRole="Feedback" />
+          <NavigationProperty Name="Follows" Relationship="Self.FK_Follow_Employer" FromRole="Employer" ToRole="Follow" />
+        </EntityType>
+        <EntityType Name="Fb_Detail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Point" Type="Double" Nullable="false" />
+          <Property Name="FeedbackID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Feedback" Relationship="Self.FK_Feedback_Fb_Detail" FromRole="Fb_Detail" ToRole="Feedback" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="JskID" Type="Int32" Nullable="false" />
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="Titile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employer" Relationship="Self.FK_Feedback_Employer" FromRole="Feedback" ToRole="Employer" />
+          <NavigationProperty Name="Fb_Detail" Relationship="Self.FK_Feedback_Fb_Detail" FromRole="Feedback" ToRole="Fb_Detail" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Feedback_User" FromRole="Feedback" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Follow">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="JskID" Type="Int32" Nullable="false" />
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employer" Relationship="Self.FK_Follow_Employer" FromRole="Follow" ToRole="Employer" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Follow_User" FromRole="Follow" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="SkillID" Type="Int32" Nullable="false" />
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="PositionID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Short_Des" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salary" Type="Double" Nullable="false" />
+          <Property Name="Time" Type="Double" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="Self.FK_Job_Location" FromRole="Job" ToRole="Location" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_Job_Position" FromRole="Job" ToRole="Position" />
+          <NavigationProperty Name="User_Job" Relationship="Self.FK_User_Job_Job" FromRole="Job" ToRole="User_Job" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employers" Relationship="Self.FK_Employer_Location" FromRole="Location" ToRole="Employer" />
+          <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_Location" FromRole="Location" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Jobs" Relationship="Self.FK_Job_Position" FromRole="Position" ToRole="Job" />
+        </EntityType>
+        <EntityType Name="Skill">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.User__Skills" FromRole="Skill" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Type" FromRole="Type" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CV_Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="SkillID" Type="Int32" />
+          <NavigationProperty Name="Feedbacks" Relationship="Self.FK_Feedback_User" FromRole="User" ToRole="Feedback" />
+          <NavigationProperty Name="Follows" Relationship="Self.FK_Follow_User" FromRole="User" ToRole="Follow" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_User_Type" FromRole="User" ToRole="Type" />
+          <NavigationProperty Name="User_Job" Relationship="Self.FK_User_Job_User" FromRole="User" ToRole="User_Job" />
+          <NavigationProperty Name="Skills" Relationship="Self.User__Skills" FromRole="User" ToRole="Skill" />
+        </EntityType>
+        <EntityType Name="User_Job">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="JobID" Type="Int32" Nullable="false" />
+          <Property Name="JskID" Type="Int32" Nullable="false" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Act_Type" Relationship="Self.FK_User_Job_Act_Type" FromRole="User_Job" ToRole="Act_Type" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_User_Job_Job" FromRole="User_Job" ToRole="Job" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Job_User" FromRole="User_Job" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_User_Job_Act_Type">
+          <End Role="Act_Type" Type="Self.Act_Type" Multiplicity="1" />
+          <End Role="User_Job" Type="Self.User_Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Act_Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Job">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employer_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Employer" Type="Self.Employer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employer">
+              <PropertyRef Name="ID_Location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_Employer">
+          <End Role="Employer" Type="Self.Employer" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Follow_Employer">
+          <End Role="Employer" Type="Self.Employer" Multiplicity="1" />
+          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Follow">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_Fb_Detail">
+          <End Role="Fb_Detail" Type="Self.Fb_Detail" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Fb_Detail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Feedback_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="JskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Follow_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Follow">
+              <PropertyRef Name="JskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Location">
+          <End Role="Location" Type="Self.Location" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Job_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="1" />
+          <End Role="Job" Type="Self.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Job">
+              <PropertyRef Name="PositionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Job_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="User_Job" Type="Self.User_Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Job">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Type">
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Job_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Job" Type="Self.User_Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Job">
+              <PropertyRef Name="JskID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User__Skills">
+          <End Role="Skill" Type="Self.Skill" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Act_Type" EntityType="Self.Act_Type" />
+          <EntitySet Name="Employers" EntityType="Self.Employer" />
+          <EntitySet Name="Fb_Details" EntityType="Self.Fb_Detail" />
+          <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+          <EntitySet Name="Follows" EntityType="Self.Follow" />
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Positions" EntityType="Self.Position" />
+          <EntitySet Name="Skills" EntityType="Self.Skill" />
+          <EntitySet Name="Types" EntityType="Self.Type" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="User_Job" EntityType="Self.User_Job" />
+          <AssociationSet Name="FK_User_Job_Act_Type" Association="Self.FK_User_Job_Act_Type">
+            <End Role="Act_Type" EntitySet="Act_Type" />
+            <End Role="User_Job" EntitySet="User_Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employer_Location" Association="Self.FK_Employer_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Employer" EntitySet="Employers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_Employer" Association="Self.FK_Feedback_Employer">
+            <End Role="Employer" EntitySet="Employers" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Follow_Employer" Association="Self.FK_Follow_Employer">
+            <End Role="Employer" EntitySet="Employers" />
+            <End Role="Follow" EntitySet="Follows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_Fb_Detail" Association="Self.FK_Feedback_Fb_Detail">
+            <End Role="Fb_Detail" EntitySet="Fb_Details" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_User" Association="Self.FK_Feedback_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Follow_User" Association="Self.FK_Follow_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Follow" EntitySet="Follows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Location" Association="Self.FK_Job_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Job_Position" Association="Self.FK_Job_Position">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="Job" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Job_Job" Association="Self.FK_User_Job_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="User_Job" EntitySet="User_Job" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Type" Association="Self.FK_User_Type">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Job_User" Association="Self.FK_User_Job_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="User_Job" EntitySet="User_Job" />
+          </AssociationSet>
+          <AssociationSet Name="User__Skills" Association="Self.User__Skills">
+            <End Role="Skill" EntitySet="Skills" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Act_Type">
+            <EntityTypeMapping TypeName="Model.Act_Type">
+              <MappingFragment StoreEntitySet="Act_Type">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employers">
+            <EntityTypeMapping TypeName="Model.Employer">
+              <MappingFragment StoreEntitySet="Employer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
+                <ScalarProperty Name="Company_Web" ColumnName="Company_Web" />
+                <ScalarProperty Name="ID_Location" ColumnName="ID_Location" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fb_Details">
+            <EntityTypeMapping TypeName="Model.Fb_Detail">
+              <MappingFragment StoreEntitySet="Fb Detail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="FeedbackID" ColumnName="FeedbackID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="Model.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="JskID" ColumnName="JskID" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="Titile" ColumnName="Titile" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Follows">
+            <EntityTypeMapping TypeName="Model.Follow">
+              <MappingFragment StoreEntitySet="Follow">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="JskID" ColumnName="JskID" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="Model.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Short_Des" ColumnName="Short_Des" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="Model.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="Model.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Skills">
+            <EntityTypeMapping TypeName="Model.Skill">
+              <MappingFragment StoreEntitySet="Skill">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="Model.Type">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CV_Link" ColumnName="CV_Link" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="SkillID" ColumnName="SkillID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Job">
+            <EntityTypeMapping TypeName="Model.User_Job">
+              <MappingFragment StoreEntitySet="User_Job">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="JskID" ColumnName="JskID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="User__Skills" TypeName="Model.User__Skills" StoreEntitySet="User _Skills">
+            <EndProperty Name="Skill">
+              <ScalarProperty Name="ID" ColumnName="skillID" />
+            </EndProperty>
+            <EndProperty Name="User">
+              <ScalarProperty Name="ID" ColumnName="JskID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
