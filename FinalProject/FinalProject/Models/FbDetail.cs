@@ -12,16 +12,13 @@ namespace FinalProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Feedback
+    public partial class FbDetail
     {
         public int ID { get; set; }
-        public int JskID { get; set; }
-        public int EmpID { get; set; }
-        public string Titile { get; set; }
-        public string Content { get; set; }
+        public string Type { get; set; }
+        public double Point { get; set; }
+        public int FeedbackID { get; set; }
     
-        public virtual Employer Employer { get; set; }
-        public virtual FbDetail FbDetail { get; set; }
-        public virtual User User { get; set; }
+        public virtual Feedback Feedback { get; set; }
     }
 }

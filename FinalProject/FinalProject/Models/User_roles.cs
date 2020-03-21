@@ -12,12 +12,13 @@ namespace FinalProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Type
+    public partial class User_roles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Type()
+        public User_roles()
         {
             this.Users = new HashSet<User>();
+            this.User_rights = new HashSet<User_rights>();
         }
     
         public int ID { get; set; }
@@ -25,5 +26,7 @@ namespace FinalProject.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User_rights> User_rights { get; set; }
     }
 }

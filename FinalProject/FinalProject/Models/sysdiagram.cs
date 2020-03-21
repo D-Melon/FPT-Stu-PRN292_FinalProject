@@ -12,16 +12,12 @@ namespace FinalProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Feedback
+    public partial class sysdiagram
     {
-        public int ID { get; set; }
-        public int JskID { get; set; }
-        public int EmpID { get; set; }
-        public string Titile { get; set; }
-        public string Content { get; set; }
-    
-        public virtual Employer Employer { get; set; }
-        public virtual FbDetail FbDetail { get; set; }
-        public virtual User User { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

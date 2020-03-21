@@ -12,13 +12,12 @@ namespace FinalProject.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Fb_Detail
+    public partial class User_rights
     {
         public int ID { get; set; }
-        public string Type { get; set; }
-        public double Point { get; set; }
-        public int FeedbackID { get; set; }
+        public string Right_name { get; set; }
+        public Nullable<int> RoleID { get; set; }
     
-        public virtual Feedback Feedback { get; set; }
+        public virtual User_roles User_roles { get; set; }
     }
 }
