@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutJobSeeker.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1 class="list-company">Danh sách công ty hàng đầu</h1>
+    </div>
+</div>
+@foreach (var company in ViewBag.companies)
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="_1company">
+                <div class="company-title">
+                    <h2>@company.Company_Name</h2>
+                </div>
+                <div class="company_detail">
+                    <h3>@company.Name - Chức vụ : @company.Title</h3>
+                    <p>Email : @company.Email</p>
+                    <p>Phone : (+84) @company.Phone</p>
+                    <p>Địa chỉ : @company.LocationName</p>
+                    <p>Website công ty : <a href="@company.Company_Web">@company.Company_Web</a></p>
+                    <p class="login-location"><a href="#"><i class="far fa-user"></i>  Đăng nhập để xem vị trí tuyển dụng </a></p>
+                </div>
+            </div>
+        </div>
+    </div> <!--end row-->
+}
+
+
+

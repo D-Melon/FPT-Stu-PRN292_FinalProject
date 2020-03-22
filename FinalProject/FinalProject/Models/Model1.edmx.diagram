@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="94fa5b23caca4a74beb7df4d3a95698d" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Act_Type" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Employer" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FbDetail" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Feedback" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Follow" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Job" Width="1.5" PointX="6" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Location" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Position" Width="1.5" PointX="3.75" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Skill" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User_Job" Width="1.5" PointX="8.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User_rights" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User_roles" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_User_Job_Act_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Employer_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Feedback_Employer" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Follow_Employer" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Feedback_Fb_Detail" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Feedback_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Follow_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Job_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Job_Position" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_User_Job_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_User_Job_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_User_User_roles" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__User_righ__RoleI__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.User_Skills" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
