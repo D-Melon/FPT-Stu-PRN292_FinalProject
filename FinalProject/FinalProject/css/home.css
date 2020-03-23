@@ -1,26 +1,99 @@
-﻿*{
+﻿* {
     padding: 0px;
     margin: 0px;
+    font-family: 'Baloo Chettan 2', cursive;
 }
+
+body {
+    background: #fcf9f9 !important;
+    padding-bottom: 0px;
+}
+
 .navbar-custom {
     background: #303030;
 }
+
 .nav > li > a:hover, .nav > li > a {
     transition: 0.5s;
 }
-.nav > li > a:hover, .nav > li > a:focus {
-    transform: scale(1.2);
+
+    .nav > li > a:hover, .nav > li > a:focus {
+        transform: scale(1.1);
+        background: transparent;
+        transition: 0.5s;
+    }
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
     background: transparent;
-    transition: 0.5s;
 }
+
 .footer {
     background: #303030;
     color: white;
     padding: 30px 0px 15px 0px;
 }
-footer h5{
-    font-weight:bold;
+
+footer h5 {
+    font-weight: bold;
 }
-.footer a,.navbar-custom a{
+
+.footer a, .navbar-custom a {
     color: lightgray;
 }
+/* Company's information css*/
+.list-company {
+    font-family: 'Baloo Chettan 2', cursive;
+    font-size: 60px;
+    color: white;
+    text-shadow: 2px 2px 6px black;
+}
+
+._1company {
+    border: 1px solid black;
+    margin: 20px 0px;
+    padding: 10px 40px;
+    border-radius: 10px;
+    box-shadow: 5px 10px 18px #888888;
+    background: #fff2e5;
+}
+
+.company-title {
+    text-align: center;
+    background: #fe921f;
+    padding-bottom: 3px;
+    border-radius: 10px;
+}
+
+    .company-title h2 {
+        color: white;
+        font-size: 60px;
+        text-shadow: 1px 1px 4px black;
+        margin: 0px;
+    }
+
+.login-location a {
+    color: gray;
+    display: block;
+    transition: 0.5s;
+}
+
+    .login-location a:hover {
+        transform: scale(1.01);
+        transition: 0.5s;
+    }
+
+.company_detail {
+    line-height: 30px !important;
+}
+
+input {
+    max-width: 100%;
+}
+
+.box-option {
+    padding: 10px 10px;
+}
+
+    .box-option a {
+        color: #303030;
+    }

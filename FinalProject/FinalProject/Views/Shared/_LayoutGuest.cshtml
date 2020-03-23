@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Styles", false)
+
+    <link href="~/css/home.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2:400,500,600,700,800&display=swap&subset=vietnamese" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/527b25711a.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="navbar navbar-custom navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Online Job Searching", "Index", "Guest", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse ">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="">Việc làm IT</a></li>
+                    <li><a href="">Danh sách top 10 công ty mới nhất</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#modalLogin">Đăng nhập</a></li>
+                    <li><a href="../Login/Register" data-toggle="modal" data-target="">Đăng ký</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+    </div>
+    <div class="container-fluid" style="padding:0px">
+        <footer class="page-footer font-small blue pt-4 text-white footer">
+            <!-- Footer Links -->
+            <div class="container-fluid text-center text-md-left">
+                <div class="row">
+                    <!-- Grid column -->
+                    <div class="col-md-3 mb-md-0 mb-3">
+
+                        <!-- Links -->
+                        <h5 class="text-uppercase">Việc làm IT theo kỹ năng</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Java</a>
+                            </li>
+                            <li>
+                                <a href="#!">PHP</a>
+                            </li>
+                            <li>
+                                <a href="#!">.NET</a>
+                            </li>
+                            <li>
+                                <a href="#!">Tester</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="col-md-3 mb-md-0 mb-3">
+
+                        <!-- Links -->
+                        <h5 class="text-uppercase">Việc làm IT theo cấp bậc</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Lập trình viên Back End</a>
+                            </li>
+                            <li>
+                                <a href="#!">Lập trình viên PHP</a>
+                            </li>
+                            <li>
+                                <a href="#!">Lập trình viên iOS</a>
+                            </li>
+                            <li>
+                                <a href="#!">Lập trình viên Java</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="col-md-3 mb-md-0 mb-3">
+
+                        <!-- Links -->
+                        <h5 class="text-uppercase">Việc làm IT theo thành phố</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Ho Chi Minh</a>
+                            </li>
+                            <li>
+                                <a href="#!">Ha Noi</a>
+                            </li>
+                            <li>
+                                <a href="#!">Da Nang</a>
+                            </li>
+                            <li>
+                                <a href="#!">Others</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="col-md-3 mb-md-0 mb-3">
+
+                        <!-- Links -->
+                        <h5 class="text-uppercase">Việc làm IT theo công ty</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#!">Techcombank</a>
+                            </li>
+                            <li>
+                                <a href="#!">NashTech</a>
+                            </li>
+                            <li>
+                                <a href="#!">Hahalolo</a>
+                            </li>
+                            <li>
+                                <a href="#!">AXON</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+                <!-- Grid row -->
+
+            </div>
+            <!-- Footer Links -->
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">
+                © 2020 Copyright:
+                <a href="https://mdbootstrap.com/">Online Job Searching System</a>
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+        <!-- Modal -->
+        <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">Đăng nhập tại đây</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="../Login/Login" method="post">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Tên đăng nhập</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên đăng nhập" min="8" name="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Mật khẩu</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Nhập mật khẩu" min="8" name="password">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                            <button type="submit" class="btn btn-success">Đăng nhập</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
