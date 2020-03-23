@@ -6,7 +6,11 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("Styles", false)
+
     <link href="~/css/home.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2:400,500,600,700,800&display=swap&subset=vietnamese" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/527b25711a.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="navbar navbar-custom navbar-fixed-top">
@@ -17,13 +21,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Online Job Searching", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Online Job Searching", "Index", "Jobseeker", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse ">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="">Việc làm IT</a></li>
-                    <li><a href="">Danh sách top 10 công ty</a></li>
-                    <li><a href="">Đăng nhập</a></li>
+                    <li><a href="">Danh sách top 10 công ty mới nhất</a></li>
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-target="">Hello @ViewBag.user.Name</a>
+                        <div class="dropdown-menu box-option" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="#">Thông tin tài khoản</a><br />
+                            <a class="dropdown-item" href="../Login/Logout" style="color:red">Đăng xuất</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
