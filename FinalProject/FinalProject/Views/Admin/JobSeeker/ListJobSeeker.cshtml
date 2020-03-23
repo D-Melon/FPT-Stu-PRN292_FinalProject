@@ -1,0 +1,217 @@
+﻿
+@{
+    ViewBag.Title = "ListJobSeeker";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="panel panel-default">
+        <div>
+            <h2 class="text-center">
+                <b>QUẢN LÝ TÀI KHOẢN TÌM VIỆC</b>
+            </h2>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-ld-12">
+                <!--table-->
+                <div class="col-sm-8 col-md-8 col-lg-8">
+                    <div class="form-inline form-group">
+                        <input class="form-control" type="text" placeholder="Tên đăng nhập">
+                        <button class="btn btn-default">
+                            Tìm kiếm
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addModal">Thêm</button>
+                    </div>
+
+                    <table id="jobSeekerTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tên đăng nhập</th>
+                                <th>Họ tên</th>
+                                <th>Email</th>
+                                <th>Vai trò</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--edit information-->
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="form-group text-center">
+                            <label>Tên đăng nhập</label>
+                            <input type="text" class="form-control center-block" placeholder="Tên đăng nhập" />
+                        </div>
+                        <div class="form-group text-center">
+                            <label>Mật khẩu</label>
+                            <input type="password" class="form-control center-block" placeholder="Mật khẩu" />
+                        </div>
+                        <div class="form-group text-center">
+                            <label>Tên</label>
+                            <input type="text" class="form-control center-block" placeholder="Tên" />
+                        </div>
+                        <div class="form-group text-center">
+                            <label>Email</label>
+                            <input type="email" class="form-control center-block" placeholder="Email" />
+                        </div>
+                        <div class="form-group text-center">
+                            <label>CV</label>
+                            <input type="file" class="form-control center-block" placeholder="CV" />
+                        </div>
+                        <div class="form-group text-center">
+                            <label>Vai trò</label>
+                            <select class="form-control center-block">
+                                <option selected value="">Chọn vai trò</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Guest</option>
+                                <option value="3">User</option>
+                            </select>
+                        </div>
+                        <div class="form-group text-center">
+                            <div class="btn-group-sm">
+                                <button class="btn btn-info">Quản lý quyền</button>
+                                <button class="btn btn-success">Cập nhật</button>
+                                <button id="deleteBtn" class="btn btn-danger">Xóa</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Add Modal-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myAddModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"><b>Thêm tài khoản</b></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input id="userNameAddFrm" type="text" class="form-control center-block" placeholder="Username" />
+                </div>
+                <div class="form-group">
+                    <input id="passWordAddFrm" type="password" class="form-control center-block" placeholder="Password" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group-sm">
+                    <button id="addBtn" class="btn btn-success">Thêm</button>
+                    <button id="exitAddFrm" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <!--DATATABLE-->
+    <script>
+        var table;
+        $(document).ready(function () {
+            $("#pre-load-layer").show();
+            $("#pre-load").show();
+
+            table = $("#jobSeekerTable").DataTable({
+                "ajax": {
+                    "url": "../AccountManagement/ListJobSeeker",
+                    "type": "POST",
+                    "datatype": "json",
+                    "cache": "false",
+                    "dataSrc": function (json) {
+                        return json["listAccount"];
+                    }
+                },
+                "columns": [
+                    { "data": "Username", "name": "Username" },
+                    { "data": "Password", "name": "Password" },
+                    { "data": "Email", "name": "Email" },
+                    { "data": "Name", "name": "Name" }
+                ],
+                "serverSide": "true",
+                "order": [0, "asc"],
+                "searching": false,
+                "lengthChange": false,
+                "autoWidth": false,
+                "filter": true,
+                "info": false,
+                "language": {
+                    emptyTable: "<li class='text-danger' align='center'>Không có dữ liệu</li>",
+                    paginate:
+                    {
+                        previous: "Trang trước",
+                        next: "Trang sau",
+                        first: "|<",
+                        last: ">|"
+                    }
+                },
+                "initComplete": function (settings, json) {
+                    setTimeout(function () {
+                        $("#pre-load").hide();
+                        $("#pre-load-layer").hide();
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+
+    <!--ADD-->
+    <script>
+        $(document).ready(function () {
+            $("#addBtn").click(function () {
+                $("#pre-load-layer").show();
+                $("#pre-load").show();
+                $.ajax({
+                    url: "../AccountManagement/AddAccount",
+                    type: "POST",
+                    datatype: "json",
+                    data: {
+                        "username": $("#userNameAddFrm").val(),
+                        "password": $("#passWordAddFrm").val()
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $("#pre-load-layer").hide();
+                            $("#pre-load").hide();
+                            $("#exitAddFrm").click();
+                            successAlert(response.title, response.message);
+                            $("#userNameAddFrm").val("");
+                            $("#passWordAddFrm").val("");
+                        } else {
+                            $("#pre-load-layer").hide();
+                            $("#pre-load").hide();
+                            errorAlert(response.title, response.message);
+                        }
+                    },
+                    error: function (response) {
+                        $("#pre-load-layer").hide();
+                        $("#pre-load").hide();
+                        errorAlert(response.title, response.message);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+    <!--DELETE-->
+    <script>
+        $(document).ready(function () {
+            $("#deleteBtn").click(function () {
+
+            });
+        });
+    </script>
+}
