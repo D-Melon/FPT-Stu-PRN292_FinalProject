@@ -1,0 +1,62 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <!--CSS-->
+    @Styles.Render("~/Content/css")
+    <link href="~/css/home.css" rel="stylesheet" />
+    <!--DataTable CSS-->
+    <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <!--Pre-load-->
+    <link href="~/css/preload.css" rel="stylesheet" />
+    <!--SCRIPTS-->
+    <!---->
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <!--DataTable Scripts-->
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <!--sweet alert-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/Scripts/custom/sweet-alert.js"></script>
+</head>
+<body style="position: relative;">
+    <!--pre-load-->
+    <div id="pre-load">
+    </div>
+    <div id="pre-load-layer">
+    </div>
+
+    <div class="navbar navbar-custom navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Online Job Searching", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <p class="navbar-right">
+                    <span>Hello @ViewBag.sessionName, </span><a href="">Đăng xuất</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
