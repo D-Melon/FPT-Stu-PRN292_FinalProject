@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FinalProject.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Act_Type">
           <Key>
             <PropertyRef Name="ID" />
@@ -88,6 +88,16 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
@@ -99,7 +109,6 @@
           <Property Name="Name" Type="nvarchar(max)" />
           <Property Name="CV_Link" Type="nvarchar(max)" />
           <Property Name="RoleID" Type="int" />
-          <Property Name="SkillID" Type="int" />
         </EntityType>
         <EntityType Name="User_Job">
           <Key>
@@ -133,7 +142,7 @@
           <Property Name="JskID" Type="int" Nullable="false" />
           <Property Name="skillID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__User_righ__RoleI__571DF1D5">
+        <Association Name="FK__User_righ__RoleI__34C8D9D1">
           <End Role="User_roles" Type="Self.User_roles" Multiplicity="0..1" />
           <End Role="User_rights" Type="Self.User_rights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -313,7 +322,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ModelStoreContainer">
+        <EntityContainer Name="FinalProjectStoreContainer">
           <EntitySet Name="Act_Type" EntityType="Self.Act_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employer" EntityType="Self.Employer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FbDetail" EntityType="Self.FbDetail" Schema="dbo" store:Type="Tables" />
@@ -323,12 +332,13 @@
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Skill" EntityType="Self.Skill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Job" EntityType="Self.User_Job" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_rights" EntityType="Self.User_rights" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_roles" EntityType="Self.User_roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Skills" EntityType="Self.User_Skills" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__User_righ__RoleI__571DF1D5" Association="Self.FK__User_righ__RoleI__571DF1D5">
+          <AssociationSet Name="FK__User_righ__RoleI__34C8D9D1" Association="Self.FK__User_righ__RoleI__34C8D9D1">
             <End Role="User_roles" EntitySet="User_roles" />
             <End Role="User_rights" EntitySet="User_rights" />
           </AssociationSet>
@@ -393,7 +403,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="FinalProject" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Act_Type">
           <Key>
             <PropertyRef Name="ID" />
@@ -494,6 +504,16 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.User_Skills" FromRole="Skill" ToRole="User" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
@@ -505,7 +525,6 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CV_Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RoleID" Type="Int32" />
-          <Property Name="SkillID" Type="Int32" />
           <NavigationProperty Name="Feedbacks" Relationship="Self.FK_Feedback_User" FromRole="User" ToRole="Feedback" />
           <NavigationProperty Name="Follows" Relationship="Self.FK_Follow_User" FromRole="User" ToRole="Follow" />
           <NavigationProperty Name="User_Job" Relationship="Self.FK_User_Job_User" FromRole="User" ToRole="User_Job" />
@@ -531,7 +550,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Right_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="RoleID" Type="Int32" />
-          <NavigationProperty Name="User_roles" Relationship="Self.FK__User_righ__RoleI__571DF1D5" FromRole="User_rights" ToRole="User_roles" />
+          <NavigationProperty Name="User_roles" Relationship="Self.FK__User_righ__RoleI__34C8D9D1" FromRole="User_rights" ToRole="User_roles" />
         </EntityType>
         <EntityType Name="User_roles">
           <Key>
@@ -540,7 +559,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK_User_User_roles" FromRole="User_roles" ToRole="User" />
-          <NavigationProperty Name="User_rights" Relationship="Self.FK__User_righ__RoleI__571DF1D5" FromRole="User_roles" ToRole="User_rights" />
+          <NavigationProperty Name="User_rights" Relationship="Self.FK__User_righ__RoleI__34C8D9D1" FromRole="User_roles" ToRole="User_rights" />
         </EntityType>
         <Association Name="FK_User_Job_Act_Type">
           <End Role="Act_Type" Type="Self.Act_Type" Multiplicity="1" />
@@ -686,7 +705,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__User_righ__RoleI__571DF1D5">
+        <Association Name="FK__User_righ__RoleI__34C8D9D1">
           <End Role="User_roles" Type="Self.User_roles" Multiplicity="0..1" />
           <End Role="User_rights" Type="Self.User_rights" Multiplicity="*" />
           <ReferentialConstraint>
@@ -712,6 +731,7 @@
           <EntitySet Name="Locations" EntityType="Self.Location" />
           <EntitySet Name="Positions" EntityType="Self.Position" />
           <EntitySet Name="Skills" EntityType="Self.Skill" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="User_Job" EntityType="Self.User_Job" />
           <EntitySet Name="User_rights" EntityType="Self.User_rights" />
@@ -764,7 +784,7 @@
             <End Role="User_roles" EntitySet="User_roles" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK__User_righ__RoleI__571DF1D5" Association="Self.FK__User_righ__RoleI__571DF1D5">
+          <AssociationSet Name="FK__User_righ__RoleI__34C8D9D1" Association="Self.FK__User_righ__RoleI__34C8D9D1">
             <End Role="User_roles" EntitySet="User_roles" />
             <End Role="User_rights" EntitySet="User_rights" />
           </AssociationSet>
@@ -778,9 +798,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="FinalProjectEntities">
+        <EntityContainerMapping StorageEntityContainer="FinalProjectStoreContainer" CdmEntityContainer="FinalProjectEntities">
           <EntitySetMapping Name="Act_Type">
-            <EntityTypeMapping TypeName="Model.Act_Type">
+            <EntityTypeMapping TypeName="FinalProject.Act_Type">
               <MappingFragment StoreEntitySet="Act_Type">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -788,7 +808,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employers">
-            <EntityTypeMapping TypeName="Model.Employer">
+            <EntityTypeMapping TypeName="FinalProject.Employer">
               <MappingFragment StoreEntitySet="Employer">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
@@ -802,7 +822,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FbDetails">
-            <EntityTypeMapping TypeName="Model.FbDetail">
+            <EntityTypeMapping TypeName="FinalProject.FbDetail">
               <MappingFragment StoreEntitySet="FbDetail">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
@@ -812,7 +832,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Feedbacks">
-            <EntityTypeMapping TypeName="Model.Feedback">
+            <EntityTypeMapping TypeName="FinalProject.Feedback">
               <MappingFragment StoreEntitySet="Feedback">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="JskID" ColumnName="JskID" />
@@ -823,7 +843,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Follows">
-            <EntityTypeMapping TypeName="Model.Follow">
+            <EntityTypeMapping TypeName="FinalProject.Follow">
               <MappingFragment StoreEntitySet="Follow">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="JskID" ColumnName="JskID" />
@@ -832,7 +852,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Jobs">
-            <EntityTypeMapping TypeName="Model.Job">
+            <EntityTypeMapping TypeName="FinalProject.Job">
               <MappingFragment StoreEntitySet="Job">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="SkillID" ColumnName="SkillID" />
@@ -848,7 +868,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Locations">
-            <EntityTypeMapping TypeName="Model.Location">
+            <EntityTypeMapping TypeName="FinalProject.Location">
               <MappingFragment StoreEntitySet="Location">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -856,7 +876,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Positions">
-            <EntityTypeMapping TypeName="Model.Position">
+            <EntityTypeMapping TypeName="FinalProject.Position">
               <MappingFragment StoreEntitySet="Position">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -864,15 +884,26 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Skills">
-            <EntityTypeMapping TypeName="Model.Skill">
+            <EntityTypeMapping TypeName="FinalProject.Skill">
               <MappingFragment StoreEntitySet="Skill">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FinalProject.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="Model.User">
+            <EntityTypeMapping TypeName="FinalProject.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
@@ -881,12 +912,11 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CV_Link" ColumnName="CV_Link" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="SkillID" ColumnName="SkillID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User_Job">
-            <EntityTypeMapping TypeName="Model.User_Job">
+            <EntityTypeMapping TypeName="FinalProject.User_Job">
               <MappingFragment StoreEntitySet="User_Job">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="JobID" ColumnName="JobID" />
@@ -896,7 +926,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User_rights">
-            <EntityTypeMapping TypeName="Model.User_rights">
+            <EntityTypeMapping TypeName="FinalProject.User_rights">
               <MappingFragment StoreEntitySet="User_rights">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Right_name" ColumnName="Right_name" />
@@ -905,14 +935,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User_roles">
-            <EntityTypeMapping TypeName="Model.User_roles">
+            <EntityTypeMapping TypeName="FinalProject.User_roles">
               <MappingFragment StoreEntitySet="User_roles">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="User_Skills" TypeName="Model.User_Skills" StoreEntitySet="User_Skills">
+          <AssociationSetMapping Name="User_Skills" TypeName="FinalProject.User_Skills" StoreEntitySet="User_Skills">
             <EndProperty Name="Skill">
               <ScalarProperty Name="ID" ColumnName="skillID" />
             </EndProperty>

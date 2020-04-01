@@ -3,6 +3,7 @@
     ViewBag.Title = "ListJobSeeker";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
+@using FinalProject.Models
 
 <div class="container-fluid">
     <div class="panel panel-default">
@@ -46,37 +47,38 @@
                     <div class="panel panel-default">
                         <div class="form-group text-center">
                             <label>Tên đăng nhập</label>
-                            <input type="text" class="form-control center-block" placeholder="Tên đăng nhập" />
+                            <input id="usernameED" type="text" class="form-control center-block" placeholder="Tên đăng nhập" disabled />
                         </div>
                         <div class="form-group text-center">
                             <label>Mật khẩu</label>
-                            <input type="password" class="form-control center-block" placeholder="Mật khẩu" />
+                            <input id="passwordED" type="password" class="form-control center-block" placeholder="Mật khẩu" />
                         </div>
                         <div class="form-group text-center">
                             <label>Tên</label>
-                            <input type="text" class="form-control center-block" placeholder="Tên" />
+                            <input id="nameED" type="text" class="form-control center-block" placeholder="Tên" />
                         </div>
                         <div class="form-group text-center">
                             <label>Email</label>
-                            <input type="email" class="form-control center-block" placeholder="Email" />
+                            <input id="emailED" type="email" class="form-control center-block" placeholder="Email" />
                         </div>
                         <div class="form-group text-center">
                             <label>CV</label>
-                            <input type="file" class="form-control center-block" placeholder="CV" />
+                            <input id="cvED" type="file" class="form-control center-block" placeholder="CV" />
                         </div>
                         <div class="form-group text-center">
                             <label>Vai trò</label>
-                            <select class="form-control center-block">
-                                <option selected value="">Chọn vai trò</option>
-                                <option value="1">Admin</option>
-                                <option value="2">Guest</option>
-                                <option value="3">User</option>
+                            <select id="roleIDED" class="form-control center-block">
+                                <option selected disabled value="">Chọn vai trò</option>
+                                @foreach (User_roles us_r in ViewBag.listRole)
+                                {
+                                    <option value="@us_r.ID">@us_r.Name</option>
+                                }
                             </select>
                         </div>
                         <div class="form-group text-center">
                             <div class="btn-group-sm">
                                 <button class="btn btn-info">Quản lý quyền</button>
-                                <button class="btn btn-success">Cập nhật</button>
+                                <button id="updateBtn" class="btn btn-success">Cập nhật</button>
                                 <button id="deleteBtn" class="btn btn-danger">Xóa</button>
                             </div>
                         </div>
@@ -122,7 +124,6 @@
         $(document).ready(function () {
             $("#pre-load-layer").show();
             $("#pre-load").show();
-
             table = $("#jobSeekerTable").DataTable({
                 "ajax": {
                     "url": "../AccountManagement/ListJobSeeker",
@@ -134,10 +135,14 @@
                     }
                 },
                 "columns": [
-                    { "data": "Username", "name": "Username" },
-                    { "data": "Password", "name": "Password" },
+                    {
+                        "data": "", "name": "Username", "render": function (data, type, row) {
+                            return "<a name=\"" + row["ID"] + "\" class=\"UserID btn blue-text\" >" + row["Username"] + "</a>"
+                        }
+                    },
+                    { "data": "Name", "name": "Name" },
                     { "data": "Email", "name": "Email" },
-                    { "data": "Name", "name": "Name" }
+                    { "data": "RoleName", "name": "RoleName" }
                 ],
                 "serverSide": "true",
                 "order": [0, "asc"],
@@ -188,6 +193,9 @@
                             successAlert(response.title, response.message);
                             $("#userNameAddFrm").val("");
                             $("#passWordAddFrm").val("");
+
+                            //reload table
+                            table.ajax.reload();
                         } else {
                             $("#pre-load-layer").hide();
                             $("#pre-load").hide();
@@ -204,14 +212,131 @@
         });
     </script>
 
+    <!--EDIT-->
+    <script>
+        var user_id;
+        $(document).ready(function () {
+            $("#jobSeekerTable").on("click", ".UserID", function () {
+                user_id = $(this).attr("name");
+                getDataAccountByUserID(user_id);
+            });
 
+            //click Cập nhật
+            $("#updateBtn").click(function () {
+                var account = {
+                    id: user_id,
+                    password: $("#passwordED").val(),
+                    name: $("#nameED").val(),
+                    email: $("#emailED").val(),
+                    cv_link: $("#cvED").val(),
+                    role_id: $("#roleIDED").val()
+                }
+
+                $.ajax({
+                    url: "../AccountManagement/EditAccount",
+                    type: "POST",
+                    datatype: "json",
+                    data: {
+                        "account": JSON.stringify(account)
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            successAlert(response.title, response.message);
+                            table.ajax.reload();
+                        } else {
+                            errorAlert(response.title, response.message);
+                            table.ajax.reload();
+                        }
+                    },
+                    error: function (response) {
+                        errorAlert(response.title, response.message);
+                    }
+                });
+            });
+        });
+    </script>
+    <!--get data Account by UserID-->
+    <script>
+        function getDataAccountByUserID(user_id) {
+            $.ajax({
+                url: "../AccountManagement/getAccountByID",
+                type: "POST",
+                datatype: "json",
+                data: {
+                    "user_id": user_id
+                },
+                success: function (response) {
+                    if (response.success) {
+                        var accountByID = response.accountByID;
+                        $("#usernameED").val(accountByID.Username);
+                        $("#passwordED").val(accountByID.Password);
+                        $("#nameED").val(accountByID.Name);
+                        $("#emailED").val(accountByID.Email);
+                        $("#cvED").val(accountByID.CV_Link);
+                        $("#roleIDED").val(accountByID.RoleID);
+                    } else {
+                        errorAlert(response.title, response.message);
+                    }
+                },
+                error: function (response) {
+                    errorAlert(response.title, response.message);
+                }
+            });
+        }
+    </script>
 
     <!--DELETE-->
     <script>
         $(document).ready(function () {
             $("#deleteBtn").click(function () {
-
+                confirmAlert("Xóa", "Xác nhận xóa tài khoản?", function () {
+                    deleteByID(user_id);
+                });
             });
         });
+    </script>
+
+    <!--Delete trigger function-->
+    <script>
+        function deleteByID(user_id) {
+            $("#pre-load-layer").show();
+            $("#pre-load").show();
+
+            $.ajax({
+                url: "../AccountManagement/DeleteAccount",
+                type: "POST",
+                datatype: "json",
+                data: {
+                    "user_id": user_id
+                },
+                success: function (response) {
+                    if (response.success) {
+                        $("#usernameED").val("");
+                        $("#passwordED").val("");
+                        $("#nameED").val("");
+                        $("#emailED").val("");
+                        $("#cvED").val("");
+                        $("#roleIDED option").prop("selected", function () {
+                            return this.defaultSelected;
+                        });
+
+                        $("#pre-load-layer").hide();
+                        $("#pre-load").hide();
+                        
+                        successAlert(response.title, response.message);
+                        table.ajax.reload();
+                    } else {
+                        $("#pre-load-layer").hide();
+                        $("#pre-load").hide();
+
+                        errorAlert(response.title, response.message);
+                        table.ajax.reload();
+                    }
+                },
+                error: function (response) {
+                    errorAlert(response.title, response.message);
+                }
+            });
+        }
     </script>
 }
