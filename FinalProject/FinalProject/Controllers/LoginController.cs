@@ -69,7 +69,6 @@ namespace FinalProject.Controllers
                     u.Email = email;
                     u.Name = name;
                     u.RoleID = 2;
-                    u.SkillID = 0;
                     db.Users.Add(u);
                     db.SaveChanges();
                     return Redirect("/Guest/Index");

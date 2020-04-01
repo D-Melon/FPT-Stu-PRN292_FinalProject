@@ -34,6 +34,7 @@ namespace FinalProject.Models
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<User_Job> User_Job { get; set; }
         public virtual DbSet<User_rights> User_rights { get; set; }
