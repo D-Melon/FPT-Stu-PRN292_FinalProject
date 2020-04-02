@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Admin\AccountManagementController.cs" />
+    <Compile Include="Controllers\Admin\JobManagementController.cs" />
     <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\JobseekerController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -172,10 +173,13 @@
     <Compile Include="Models\Location.cs">
       <DependentUpon>FinalProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Position.cs">
+    <Compile Include="Models\Skill.cs">
       <DependentUpon>FinalProject.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Skill.cs">
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>FinalProject.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>FinalProject.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
@@ -256,10 +260,12 @@
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Shared\_LayoutGuest.cshtml" />
     <Content Include="Views\Shared\_LayoutJobSeeker.cshtml" />
+    <Content Include="Views\Admin\Job\ListJob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\Employer\" />
+    <Folder Include="Views\JobManager\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

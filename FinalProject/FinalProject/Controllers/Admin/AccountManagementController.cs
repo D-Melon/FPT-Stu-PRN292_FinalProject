@@ -21,6 +21,7 @@ namespace FinalProject.Controllers
             using (FinalProjectEntities db = new FinalProjectEntities())
             {
                 var listRole = db.User_roles.ToList();
+                ViewBag.user = (User)Session["account"];
                 ViewBag.listRole = listRole;
             }
             return View("~/Views/Admin/JobSeeker/ListJobSeeker.cshtml");
@@ -32,13 +33,19 @@ namespace FinalProject.Controllers
         {
             try
             {
+                //params
+                string username_filter = Request["username_filter"];
+
                 int start = Convert.ToInt32(Request["start"]);
                 int length = Convert.ToInt32(Request["length"]);
                 string searchValue = Request["search[value]"];
                 string sortColumnName = Request["columns[" + Request["order[0][column]"] + "][name]"];
                 string sortDirection = Request["order[0][dir]"];
 
-                var mySql = @"select
+                var mySql = "";
+                if (username_filter == null || username_filter == "")
+                {
+                    mySql = @"select
                             u.ID,
                             u.Username,
                             u.Name, 
@@ -46,16 +53,32 @@ namespace FinalProject.Controllers
                             us.Name as 'RoleName'
                             from [User] u join User_roles us on u.RoleID = us.ID 
                             order by " + sortColumnName + " " + sortDirection + " OFFSET " + start + " ROWS FETCH NEXT " + length + " ROWS ONLY";
+                }
+                else
+                {
+                    mySql = @"select
+                            u.ID,
+                            u.Username,
+                            u.Name, 
+                            u.Email, 
+                            us.Name as 'RoleName'
+                            from [User] u join User_roles us on u.RoleID = us.ID 
+                            where Username = @username_filter
+                            order by " + sortColumnName + " " + sortDirection + " OFFSET " + start + " ROWS FETCH NEXT " + length + " ROWS ONLY";
+                }
                 using (FinalProjectEntities db = new FinalProjectEntities())
                 {
-                    var listAccount = db.Database.SqlQuery<Account>(mySql).ToList();
+                    var listAccount = (username_filter == null || username_filter == "") 
+                        ? db.Database.SqlQuery<Account>(mySql).ToList() 
+                        : db.Database.SqlQuery<Account>(mySql, new SqlParameter("@username_filter", username_filter)).ToList();
 
                     int totalrows = listAccount.Count();
                     int totalrowsafterfiltering = totalrows;
 
-                    return Json(new {recordsTotal = totalrows, recordsFiltered = totalrowsafterfiltering, listAccount = listAccount });
+                    return Json(new { recordsTotal = totalrows, recordsFiltered = totalrowsafterfiltering, listAccount = listAccount });
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return View("~/Views/Error.cshtml");
             }
@@ -81,13 +104,15 @@ namespace FinalProject.Controllers
                         us.RoleID = 2;
                         db.Users.Add(us);
                         db.SaveChanges();
-                        return Json(new { success = true, title = "Thành công", message = "Thêm tài khoản thành công."});
-                    } else
+                        return Json(new { success = true, title = "Thành công", message = "Thêm tài khoản thành công." });
+                    }
+                    else
                     {
                         return Json(new { success = false, title = "Lỗi", message = "Tên tài khoản đã có, hãy chọn tên tài khoản khác." });
                     }
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return Json(new { error = true, message = "Có lỗi xảy ra." });
             }
@@ -111,13 +136,15 @@ namespace FinalProject.Controllers
                     if (accountByID != null)
                     {
                         return Json(new { success = true, accountByID = accountByID });
-                    } else
+                    }
+                    else
                     {
                         return Json(new { success = false, title = "Lỗi", message = "Lấy dữ liệu tài khoản gặp lỗi." });
                     }
                 }
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return Json(new { error = true, message = "Có lỗi xảy ra." });
             }
@@ -143,12 +170,14 @@ namespace FinalProject.Controllers
                         u_account.RoleID = Convert.ToInt32(j_account.GetValue("role_id").ToString());
                         db.SaveChanges();
                         return Json(new { success = true, title = "Thành công", message = "Cập nhật tài khoản thành công." });
-                    } else
+                    }
+                    else
                     {
                         return Json(new { success = false, title = "Lỗi", message = "Cập nhật tài khoản lỗi." });
                     }
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return Json(new { error = true, message = "Có lỗi xảy ra." });
             }
@@ -169,19 +198,22 @@ namespace FinalProject.Controllers
                         db.Users.Remove(account);
                         db.SaveChanges();
                         return Json(new { success = true, title = "Thành công", message = "Xóa tài khoản thành công." });
-                    } else
+                    }
+                    else
                     {
                         return Json(new { success = true, title = "Lỗi", message = "Không tìm thấy tài khoản cần xóa." });
                     }
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 return Json(new { error = true, message = "Có lỗi xảy ra." });
             }
         }
 
         ///Custom Entites
-        public class Account : User {
+        public class Account : User
+        {
             public string RoleName { get; set; }
         }
     }
