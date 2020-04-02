@@ -3,19 +3,32 @@
     margin: 0px;
     font-family: 'Baloo Chettan 2', cursive;
 }
-
 .pager {
     font-size: 30px;
 }
 
+    .pager span, .pager a {
+        display: inline-block;
+        border: 1px solid gray;
+        padding: 1px 10px;
+        background: #edecea;
+        border-radius: 10px;
+        box-sizing: border-box;
+    }
+
     .pager span {
-        color: #fe921f;
+        color: #a19e99;
     }
 
     .pager a {
-        color: #303030;
-        text-decoration: underline;
+        color: #2a5985;
     }
+
+        .pager a:hover {
+            color: #f5a425;
+            text-decoration: none;
+        }
+
 
 body {
     background: #fcf9f9 !important;

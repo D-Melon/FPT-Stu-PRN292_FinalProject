@@ -79,7 +79,7 @@ namespace FinalProject.Controllers
         public ActionResult Logout()
         {
             Session.Abandon();
-            return Redirect("/OnlineJobSearching/Guest/Index");
+            return Redirect("/OnlineJobSearching/");
         }
     }
 }
