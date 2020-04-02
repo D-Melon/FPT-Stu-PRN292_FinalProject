@@ -9,10 +9,11 @@
     @RenderSection("Styles", false)
 
     <link href="~/css/home.css" rel="stylesheet" />
+
     <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2:400,500,600,700,800&display=swap&subset=vietnamese" rel="stylesheet">
     <script src="https://kit.fontawesome.com/527b25711a.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="position:relative">
     <div class="navbar navbar-custom navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -28,10 +29,10 @@
                     <li><a href="">Việc làm IT</a></li>
                     <li><a href="">Danh sách top 10 công ty mới nhất</a></li>
                     <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-target="">Hello @ViewBag.user.Name</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-target="">Hello @ViewBag.name</a>
                         <div class="dropdown-menu box-option" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="#">Thông tin tài khoản</a><br />
-                            <a class="dropdown-item" href="../Login/Logout" style="color:red">Đăng xuất</a>
+                            <a class="dropdown-item" href="/OnlineJobSearching/Login/Logout" style="color:red">Đăng xuất</a>
                         </div>
                     </li>
                 </ul>

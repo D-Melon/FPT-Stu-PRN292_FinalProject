@@ -4,6 +4,19 @@
     font-family: 'Baloo Chettan 2', cursive;
 }
 
+.pager {
+    font-size: 30px;
+}
+
+    .pager span {
+        color: #fe921f;
+    }
+
+    .pager a {
+        color: #303030;
+        text-decoration: underline;
+    }
+
 body {
     background: #fcf9f9 !important;
     padding-bottom: 0px;

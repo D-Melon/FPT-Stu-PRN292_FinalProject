@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <h1 class="list-company">Danh sách công ty hàng đầu</h1>
+        <h1 class="list-company">Danh sách công ty</h1>
     </div>
 </div>
 @foreach (var company in ViewBag.companies)
@@ -24,12 +24,24 @@
                     <p>Phone : (+84) @company.Phone</p>
                     <p>Địa chỉ : @company.LocationName</p>
                     <p>Website công ty : <a href="@company.Company_Web">@company.Company_Web</a></p>
-                    <p class="login-location"><a href="#"><i class="far fa-user"></i>  Đăng nhập để xem vị trí tuyển dụng </a></p>
                 </div>
             </div>
         </div>
     </div> <!--end row-->
 }
+<div class="pager">
+    @for(int i = 1; i <= @ViewBag.pages; i++)
+    {
+        if(i == @ViewBag.cur)
+        {
+            <span>@ViewBag.cur</span>
+        }
+        else
+        {
+            <a href="/OnlineJobSearching/JobSeeker/Index?page=@i">@i</a>
+        }
+    }
+</div>
 
 
 
