@@ -26,8 +26,8 @@ namespace FinalProject.Models
         public string Title { get; set; }
         public string Short_Des { get; set; }
         public string Detail { get; set; }
-        public double Salary { get; set; }
-        public double Time { get; set; }
+        public string Salary { get; set; }
+        public Nullable<System.DateTime> Time { get; set; }
         public int LocationID { get; set; }
     
         public virtual Employer Employer { get; set; }
