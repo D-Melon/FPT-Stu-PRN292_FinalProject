@@ -11,11 +11,13 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <!--CSS-->
     @Styles.Render("~/Content/css")
-    <link href="~/css/layout.css" rel="stylesheet" />
+    @*<link href="~/css/layout.css" rel="stylesheet" />*@
     <!--DataTable CSS-->
     <link href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
     <!--Pre-load-->
     <link href="~/css/preload.css" rel="stylesheet" />
+    <link href="~/css/home.css" rel="stylesheet" />
+
     <!--SCRIPTS-->
     <!---->
     @Scripts.Render("~/bundles/modernizr")
@@ -28,7 +30,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="~/Scripts/custom/sweet-alert.js"></script>
 </head>
-<body style="position: relative;">
+<body style="position:relative">
     <!--pre-load-->
     @*<div id="pre-load">
     </div>
@@ -60,7 +62,7 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" style="min-height:100vh">
         @RenderBody()
         <hr />
     </div>
