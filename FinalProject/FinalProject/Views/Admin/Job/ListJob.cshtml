@@ -17,11 +17,17 @@
             <div class="row">
                 <div class="col-md-12">
                     <!--Table-->
-                    <div class="form-inline form-group">
-                        <input id="username_filter" class="form-inline" type="text" placeholder="Tên đăng nhập" />
-                        <button id="searchBtn" class="btn btn-default">
-                            Tìm kiếm
-                        </button>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input id="titleJobSearch" class="form-control" type="text" placeholder="Tiêu đề" />
+                            </div>
+                            <div class="col-md-2">
+                                <button id="searchBtn" class="btn btn-default">
+                                    Tìm kiếm
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -35,8 +41,7 @@
                                 <th>Kĩ năng chuyên môn</th>
                                 <th>Công ty</th>
                                 <th>Lương</th>
-                                <th>Thời gian</th>
-                                <th></th>
+                                <th>Thời gian hết hạn</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -69,7 +74,43 @@
                 </div>
                 <div class="form-group">
                     <label>Miêu tả chi tiết</label>
-                    <textarea id="detailAddFrm" class="" placeholder="Miêu tả chi tiết"></textarea>
+                    <textarea id="detailAddFrm" rows="10" class="form-control" placeholder="Miêu tả chi tiết"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Lương</label>
+                    <input id="salaryAddFrm" class="form-control" placeholder="Lương" />
+                </div>
+                <div class="form-group">
+                    <label>Thời gian hết hạn</label>
+                    <input id="timeAddFrm" class="form-control" placeholder="Thời gian hết hạn" />
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Công ty</label>
+                                    <select id="emplIdAddFrm" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Kỹ năng cần thiết</label>
+                                    <select id="skillIdAddFrm" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Địa điểm</label>
+                                    <select id="locationIdAddFrm" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -81,3 +122,150 @@
         </div>
     </div>
 </div>
+
+<!--Modal Edit-->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myEditModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"><b>Chỉnh sửa công việc</b></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Tiêu đề</label>
+                    <input id="titleJobEditFrm" type="text" class="form-control" placeholder="Tiêu đề" />
+                </div>
+                <div class="form-group">
+                    <label>Tóm tắt</label>
+                    <input id="shortDescEditFrm" type="text" class="form-control" placeholder="Tóm tắt" />
+                </div>
+                <div class="form-group">
+                    <label>Miêu tả chi tiết</label>
+                    <textarea id="detailEditFrm" rows="10" class="form-control" placeholder="Miêu tả chi tiết"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Lương</label>
+                    <input id="salaryEditFrm" class="form-control" placeholder="Lương" />
+                </div>
+                <div class="form-group">
+                    <label>Thời gian hết hạn</label>
+                    <input id="timeEditFrm" class="form-control" placeholder="Thời gian hết hạn" />
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Công ty</label>
+                                    <select id="emplIdEditFrm" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Kỹ năng cần thiết</label>
+                                    <select id="skillIdEditFrm" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Địa điểm</label>
+                                    <select id="locationIdEditFrm" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group-sm">
+                    <button id="updateBtn" class="btn btn-success">Cập nhật</button>
+                    <button id="exitEditFrm" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    ////////////////////////////////////////////TABLE/////////////////////////////////////////////
+    <script>
+        var table;
+        $(document).ready(function () {
+            $("#pre-load-layer").show();
+            $("#pre-load").show();
+            table = $("#jobTable").DataTable({
+                "ajax": {
+                    "url": "/OnlineJobSearching/JobManagement/ListJob",
+                    "type": "POST",
+                    "datatype": "json",
+                    "data": {
+                        "titleJob": function () { return $("#titleJobSearch").val(); }
+                    },
+                    "cache": "false",
+                    "dataSrc": function (json) {
+                        return json["listJob"];
+                    }
+                },
+                "columns": [
+                    {
+                        "data": "", "name": "Title", "render": function (data, type, row) {
+                            return "<a name=\"" + row["ID"] + "\" class=\"JobID btn blue-text\" data-toggle=\"modal\" data-target=\"#editModal\" >" + row["Title"] + "</a>"
+                        }
+                    },
+                    {
+                        "data": "SkillName", "name": "SkillName"
+                    },
+                    {
+                        "data": "CompanyName", "name": "CompanyName"
+                    },
+                    {
+                        "data": "Salary","name": "Salary"
+                    },
+                    {
+                        "data": "StringDate", "name": "Time"
+                    }
+                ],
+                "serverSide": "true",
+                "order": [0, "asc"],
+                "searching": false,
+                "lengthChange": false,
+                "autoWidth": false,
+                "filter": true,
+                "info": false,
+                "language": {
+                    emptyTable: "<li class='text-danger' align='center'>Không có dữ liệu</li>",
+                    paginate:
+                    {
+                        previous: "Trang trước",
+                        next: "Trang sau",
+                        first: "|<",
+                        last: ">|"
+                    }
+                },
+                "initComplete": function (settings, json) {
+                    setTimeout(function () {
+                        $("#pre-load").hide();
+                        $("#pre-load-layer").hide();
+                    }, 2000);
+                }
+            })
+        });
+    </script>
+
+    /////////////////////////////////////////////////EDIT//////////////////////////////////////////////////////
+    <script>
+        $(document).ready(function () {
+            $("#jobTable").on("click", ".JobID", function () {
+                var titleID = $(this).attr("name");
+            });
+
+        });
+    </script>
+}

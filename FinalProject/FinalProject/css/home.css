@@ -117,6 +117,10 @@ input {
     max-width: 100%;
 }
 
+textarea {
+    max-width: 100%;
+}
+
 .box-option {
     padding: 10px 10px;
 }
