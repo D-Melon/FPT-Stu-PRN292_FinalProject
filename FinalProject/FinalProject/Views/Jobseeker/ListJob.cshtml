@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "ListJob";
+    Layout = "~/Views/Shared/_LayoutJobSeeker.cshtml";
+
+}
+<link href="~/css/jobseeker.css" rel="stylesheet" />
+
+
+<h2 class="page-header list-job">Danh sách công việc</h2>
+<div class="row">
+    <div>
+        <div class="row">
+            <div class="col-sm-12" style="padding: 0px 30px !important;">
+                <form action="/OnlineJobSearching/Jobseeker/ListJob" method="get" id="myForm">
+                    <div class="form-group">
+                        <label for="username">Tìm kiếm</label>
+                        <input type="text" class="form-control" id="key" placeholder="Nhập tên công ty" name="key" onchange="submit()" value="@ViewBag.key">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="job-block">
+    @foreach (var item in ViewBag.jobs)
+    {
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="/OnlineJobSearching/Jobseeker/DetailJob?id=@item.ID">
+                    <div class="_1job">
+                        <div class="job-title">
+                            <h2>@item.Title</h2>
+                        </div>
+                        <div class="job_detail">
+                            <h3>@item.Company_Name</h3>
+                            <div class="job-shortdes">
+                                @Html.Raw(System.Web.HttpUtility.HtmlDecode(@item.Short_Des))
+                            </div>
+                            <p class="job-skill">@item.SkillName</p>
+                            <p class="job-salary"> $ Salary : @item.Salary</p>
+                        </div>
+                        <div class="job-location">
+                            @item.LocationName
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+
+</div>
+@section scripts{
+    <script>
+        function submit() {
+            document.getElementById("myForm").submit();
+        }
+    </script>
+}
+

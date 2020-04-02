@@ -9,6 +9,18 @@
     <div class="col-sm-12">
         <h1 class="list-company">Danh sách công ty</h1>
     </div>
+    <div>
+        <div class="row">
+            <div class="col-sm-12" style="padding: 0px 30px !important;"> 
+                <form action="/OnlineJobSearching/Jobseeker/Index" method="get" id="myForm">
+                    <div class="form-group">
+                        <label for="username">Tìm kiếm</label>
+                        <input type="text" class="form-control" id="username" placeholder="Nhập tên công ty" name="company" onchange="submit()" value="@ViewBag.company">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 @foreach (var company in ViewBag.companies)
 {
@@ -30,18 +42,25 @@
     </div> <!--end row-->
 }
 <div class="pager">
-    @for(int i = 1; i <= @ViewBag.pages; i++)
+    @for (int i = 1; i <= @ViewBag.pages; i++)
     {
-        if(i == @ViewBag.cur)
+        if (i == @ViewBag.cur)
         {
             <span>@ViewBag.cur</span>
         }
         else
         {
-            <a href="/OnlineJobSearching/JobSeeker/Index?page=@i">@i</a>
+            <a href="/OnlineJobSearching/JobSeeker/Index?page=@i&company=@ViewBag.company">@i</a>
         }
     }
 </div>
+@section scripts{
+    <script>
+        function submit() {
+            document.getElementById("myForm").submit();
+        }
+    </script>
+}
 
 
 

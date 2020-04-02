@@ -1,0 +1,93 @@
+﻿.list-job {
+    font-size: 48px;
+}
+
+a ._1job {
+}
+
+p.job-salary {
+    color: green;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+a ._1job {
+    border: 2px solid #d2d2d2;
+    border-radius: 10px;
+    padding: 20px 30px;
+    margin-bottom: 40px;
+    position: relative;
+    transition: 0.3s;
+    color: #0c0c0c;
+}
+
+    a ._1job:hover {
+        background: white !important;
+        z-index: 5;
+        border-color: transparent;
+        box-shadow: 0 0 5px 1px #bcbcbc;
+        transition: 0.3s;
+    }
+
+a:hover {
+    text-decoration: none !important;
+}
+
+.job-title {
+    transition: 0.3s;
+}
+
+._1job:hover .job-title {
+    color: red;
+    transition: 0.3s;
+}
+
+.job-skill {
+    display: inline-block;
+    border: 1px solid #d2d2d2;
+    padding: 4px;
+    color: red;
+}
+
+.job-shortdes {
+    font-style: italic;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.job-location {
+    width: 80px;
+    height: 30px;
+    position: absolute;
+    right: 3%;
+    top: 50%;
+    margin-top: -15px;
+    color: gray;
+    font-size: 18px;
+}
+
+.job-address {
+    color: gray;
+}
+
+.job-createdDate {
+    color: #4562f1;
+}
+
+.description, .experience {
+    width: 100% !important;
+}
+
+.job-above {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+p.job-title {
+    font-size: 35px;
+}
+
+a.btn.btn-block.btn-danger.btn-lg {
+    display: block;
+    margin-top: 30px;
+}

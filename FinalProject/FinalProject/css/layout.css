@@ -17,11 +17,11 @@ body {
     transition: 0.5s;
 }
 
-    .nav > li > a:hover, .nav > li > a:focus {
-        transform: scale(1.1);
-        background: transparent;
-        transition: 0.5s;
-    }
+.nav > li > a:hover, .nav > li > a:focus {
+    transform: scale(1.1);
+    background: transparent;
+    transition: 0.5s;
+}
 
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
     background: transparent;

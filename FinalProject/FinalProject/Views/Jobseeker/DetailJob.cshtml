@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "DetailJob";
+    Layout = "~/Views/Shared/_LayoutJobSeeker.cshtml";
+}
+<link href="~/css/jobseeker.css" rel="stylesheet" />
+
+<div class="job-detail-block">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="job-above">
+                <p class="job-title">@ViewBag.job.Title</p>
+                <p class="job-skill">@ViewBag.job.SkillName</p>
+                <p class="job-salary"><i class="fas fa-dollar-sign"></i> Salary : @ViewBag.job.Salary</p>
+                <p class="job-address"><i class="fas fa-map-marker-alt"></i> @ViewBag.job.LocationName</p>
+                <p class="job-createdDate"><i class="far fa-clock"></i> @ViewBag.job.StringDate</p>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="job-below">
+                @Html.Raw(System.Web.HttpUtility.HtmlDecode(@ViewBag.job.Detail))
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <a href="" class="btn btn-block btn-danger btn-lg">Apply Now</a>
+        </div>
+    </div>
+
+</div>
+
