@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinalProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,8 @@ namespace FinalProject.Controllers.Admin
         // GET: JobManager
         public ActionResult Manage()
         {
-            return View("~/View/Admin/Job/ListJob.cshtml");
+            ViewBag.user = (User)Session["account"];
+            return View("~/Views/Admin/Job/ListJob.cshtml");
         }
     }
 }

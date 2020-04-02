@@ -4,24 +4,80 @@
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
 
-<div class="container-fluid">
-    <div class="panel panel-default">
-        <div>
-            <h2 class="text-center">
-                <b>QUẢN LÝ CÔNG VIỆC</b>
-            </h2>
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <div>
+                <h2 class="text-center">
+                    <b>QUẢN LÝ CÔNG VIỆC</b>
+                </h2>
+            </div>
         </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <!--Table-->
+                    <div class="form-inline form-group">
+                        <input id="username_filter" class="form-inline" type="text" placeholder="Tên đăng nhập" />
+                        <button id="searchBtn" class="btn btn-default">
+                            Tìm kiếm
+                        </button>
+                    </div>
 
-        <div class="row">
-            <div class="col-sm-12 col-md-12 col-ld-12">
-                <div class="form-inline form-group">
-                    <input id="username_filter" class="form-control" type="text" placeholder="Tên đăng nhập" />
-                    <button id="searchBtn" class="btn btn-default">
-                        Tìm kiếm
-                    </button>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addModal">Thêm</button>
+                    </div>
+
+                    <table id="jobTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tiêu đề</th>
+                                <th>Kĩ năng chuyên môn</th>
+                                <th>Công ty</th>
+                                <th>Lương</th>
+                                <th>Thời gian</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!--Modal Add-->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myAddModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"><b>Thêm công việc</b></h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Tiêu đề</label>
+                    <input id="titleJobAddFrm" type="text" class="form-control" placeholder="Tiêu đề" />
+                </div>
+                <div class="form-group">
+                    <label>Tóm tắt</label>
+                    <input id="shortDescAddFrm" type="text" class="form-control" placeholder="Tóm tắt" />
+                </div>
+                <div class="form-group">
+                    <label>Miêu tả chi tiết</label>
+                    <textarea id="detailAddFrm" class="" placeholder="Miêu tả chi tiết"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group-sm">
+                    <button id="addBtn" class="btn btn-success">Thêm</button>
+                    <button id="exitAddFrm" class="btn btn-danger" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -59,11 +59,11 @@
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="SkillID" Type="int" Nullable="false" />
           <Property Name="EmpID" Type="int" Nullable="false" />
-          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Short_Des" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Detail" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Salary" Type="float" Nullable="false" />
-          <Property Name="Time" Type="float" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Short_Des" Type="nvarchar(max)" />
+          <Property Name="Detail" Type="nvarchar(max)" />
+          <Property Name="Salary" Type="nvarchar" MaxLength="50" />
+          <Property Name="Time" Type="date" />
           <Property Name="LocationID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Location">
@@ -507,11 +507,11 @@
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="SkillID" Type="Int32" Nullable="false" />
           <Property Name="EmpID" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Short_Des" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Salary" Type="Double" Nullable="false" />
-          <Property Name="Time" Type="Double" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Short_Des" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="DateTime" Precision="0" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Employer" Relationship="Self.FK_Job_Employer" FromRole="Job" ToRole="Employer" />
           <NavigationProperty Name="Location" Relationship="Self.FK_Job_Location" FromRole="Job" ToRole="Location" />
