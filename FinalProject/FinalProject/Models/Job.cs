@@ -23,7 +23,6 @@ namespace FinalProject.Models
         public int ID { get; set; }
         public int SkillID { get; set; }
         public int EmpID { get; set; }
-        public int PositionID { get; set; }
         public string Title { get; set; }
         public string Short_Des { get; set; }
         public string Detail { get; set; }
@@ -31,8 +30,9 @@ namespace FinalProject.Models
         public double Time { get; set; }
         public int LocationID { get; set; }
     
+        public virtual Employer Employer { get; set; }
         public virtual Location Location { get; set; }
-        public virtual Position Position { get; set; }
+        public virtual Skill Skill { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User_Job> User_Job { get; set; }
     }

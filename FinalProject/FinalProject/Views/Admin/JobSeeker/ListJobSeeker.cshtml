@@ -18,8 +18,8 @@
                 <!--table-->
                 <div class="col-sm-8 col-md-8 col-lg-8">
                     <div class="form-inline form-group">
-                        <input class="form-control" type="text" placeholder="Tên đăng nhập">
-                        <button class="btn btn-default">
+                        <input id="username_filter" class="form-control" type="text" placeholder="Tên đăng nhập" />
+                        <button id="searchBtn" class="btn btn-default">
                             Tìm kiếm
                         </button>
                     </div>
@@ -126,9 +126,12 @@
             $("#pre-load").show();
             table = $("#jobSeekerTable").DataTable({
                 "ajax": {
-                    "url": "../AccountManagement/ListJobSeeker",
+                    "url": "/OnlineJobSearching/AccountManagement/ListJobSeeker",
                     "type": "POST",
                     "datatype": "json",
+                    "data": {
+                        "username_filter": function () { return $("#username_filter").val(); }
+                    },
                     "cache": "false",
                     "dataSrc": function (json) {
                         return json["listAccount"];
@@ -171,6 +174,21 @@
         });
     </script>
 
+    <!--SEARCH-->
+    <script>
+        $(document).ready(function () {
+            $("#searchBtn").click(function () {
+                $("#pre-load-layer").show();
+                $("#pre-load").show();
+                table.ajax.reload();
+                setTimeout(function () {
+                    $("#pre-load").hide();
+                    $("#pre-load-layer").hide();
+                }, 2000);
+            });
+        });
+    </script>
+
     <!--ADD-->
     <script>
         $(document).ready(function () {
@@ -178,7 +196,7 @@
                 $("#pre-load-layer").show();
                 $("#pre-load").show();
                 $.ajax({
-                    url: "../AccountManagement/AddAccount",
+                    url: "/OnlineJobSearching/AccountManagement/AddAccount",
                     type: "POST",
                     datatype: "json",
                     data: {
@@ -233,7 +251,7 @@
                 }
 
                 $.ajax({
-                    url: "../AccountManagement/EditAccount",
+                    url: "/OnlineJobSearching/AccountManagement/EditAccount",
                     type: "POST",
                     datatype: "json",
                     data: {
@@ -259,7 +277,7 @@
     <script>
         function getDataAccountByUserID(user_id) {
             $.ajax({
-                url: "../AccountManagement/getAccountByID",
+                url: "/OnlineJobSearching/AccountManagement/getAccountByID",
                 type: "POST",
                 datatype: "json",
                 data: {
@@ -303,7 +321,7 @@
             $("#pre-load").show();
 
             $.ajax({
-                url: "../AccountManagement/DeleteAccount",
+                url: "/OnlineJobSearching/AccountManagement/DeleteAccount",
                 type: "POST",
                 datatype: "json",
                 data: {
@@ -322,7 +340,7 @@
 
                         $("#pre-load-layer").hide();
                         $("#pre-load").hide();
-                        
+
                         successAlert(response.title, response.message);
                         table.ajax.reload();
                     } else {

@@ -10,20 +10,13 @@
 namespace FinalProject.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Position
+    public partial class sp_helpdiagrams_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Position()
-        {
-            this.Jobs = new HashSet<Job>();
-        }
-    
-        public int ID { get; set; }
+        public string Database { get; set; }
         public string Name { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Job> Jobs { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }

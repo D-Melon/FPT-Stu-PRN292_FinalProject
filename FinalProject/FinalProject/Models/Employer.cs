@@ -19,6 +19,7 @@ namespace FinalProject.Models
         {
             this.Feedbacks = new HashSet<Feedback>();
             this.Follows = new HashSet<Follow>();
+            this.Jobs = new HashSet<Job>();
         }
     
         public int ID { get; set; }
@@ -35,5 +36,7 @@ namespace FinalProject.Models
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Follow> Follows { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Job> Jobs { get; set; }
     }
 }
