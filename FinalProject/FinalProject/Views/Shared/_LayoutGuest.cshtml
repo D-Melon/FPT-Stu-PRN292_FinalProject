@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2:400,500,600,700,800&display=swap&subset=vietnamese" rel="stylesheet">
     <script src="https://kit.fontawesome.com/527b25711a.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body style="position:relative">
     <div class="navbar navbar-custom navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -28,12 +28,12 @@
                     <li><a href="">Việc làm IT</a></li>
                     <li><a href="">Danh sách top 10 công ty mới nhất</a></li>
                     <li><a href="" data-toggle="modal" data-target="#modalLogin">Đăng nhập</a></li>
-                    <li><a href="../Login/Register" data-toggle="modal" data-target="">Đăng ký</a></li>
+                    <li><a href="/OnlineJobSearching/Login/Register" data-toggle="modal" data-target="">Đăng ký</a></li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content" style="min-height:100vh">
         @RenderBody()
         <hr />
 
@@ -151,15 +151,15 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="../Login/Login" method="post">
+                    <form action="Login/Login" method="post">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên đăng nhập</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên đăng nhập" min="8" name="username">
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tên đăng nhập" min="8" name="username" required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Mật khẩu</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Nhập mật khẩu" min="8" name="password">
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Nhập mật khẩu" min="8" name="password" required>
                             </div>
                         </div>
                         <div class="modal-footer">

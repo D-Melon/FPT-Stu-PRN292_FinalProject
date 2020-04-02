@@ -24,18 +24,18 @@ namespace FinalProject.Controllers
             if(checkUser == null)
             {
                 Session["Notification"] = "Tên tài khoản / mật khẩu không đúng";
-                return Redirect("/Guest/Index");
+                return Redirect("/OnlineJobSearching/Guest/Index");
             }
             else
             {
                 Session["account"] = checkUser;
                 if(checkUser.RoleID == 2)
                 {
-                    return Redirect("/Jobseeker/Index");
+                    return Redirect("/OnlineJobSearching/Jobseeker/Index");
                 }
                 else if(checkUser.RoleID == 1)
                 {
-                    return Redirect("/AccountManagement/ListJobSeeker");
+                    return Redirect("/OnlineJobSearching/AccountManagement/JobSeekerManagement");
                 }
             }
             return null;
@@ -71,7 +71,7 @@ namespace FinalProject.Controllers
                     u.RoleID = 2;
                     db.Users.Add(u);
                     db.SaveChanges();
-                    return Redirect("/Guest/Index");
+                    return Redirect("/OnlineJobSearching/Guest/Index");
                 }
             }
         }
@@ -79,7 +79,7 @@ namespace FinalProject.Controllers
         public ActionResult Logout()
         {
             Session.Abandon();
-            return Redirect("/Guest/Index");
+            return Redirect("/OnlineJobSearching/Guest/Index");
         }
     }
 }
