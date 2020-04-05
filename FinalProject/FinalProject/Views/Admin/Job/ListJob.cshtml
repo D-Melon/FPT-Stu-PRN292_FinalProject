@@ -3,6 +3,7 @@
     ViewBag.Title = "ListJob";
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
 }
+@using FinalProject.Models
 
 <div class="container">
     <div class="panel">
@@ -82,7 +83,7 @@
                 </div>
                 <div class="form-group">
                     <label>Thời gian hết hạn</label>
-                    <input id="timeAddFrm" class="form-control" placeholder="Thời gian hết hạn" />
+                    <input id="timeAddFrm" class="form-control" type="date" placeholder="Thời gian hết hạn" />
                 </div>
 
                 <div class="row">
@@ -92,6 +93,10 @@
                                 <div class="form-group">
                                     <label>Công ty</label>
                                     <select id="emplIdAddFrm" class="form-control">
+                                        @foreach (Employer e in ViewBag.listEmployer)
+                                        {
+                                            <option value="@e.ID">@e.Company_Name</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -99,6 +104,10 @@
                                 <div class="form-group">
                                     <label>Kỹ năng cần thiết</label>
                                     <select id="skillIdAddFrm" class="form-control">
+                                        @foreach (Skill s in ViewBag.listSkill)
+                                        {
+                                            <option value="@s.ID">@s.Name</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -106,6 +115,10 @@
                                 <div class="form-group">
                                     <label>Địa điểm</label>
                                     <select id="locationIdAddFrm" class="form-control">
+                                        @foreach (Location l in ViewBag.listLocation)
+                                        {
+                                            <option value="@l.ID">@l.Name</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -152,7 +165,7 @@
                 </div>
                 <div class="form-group">
                     <label>Thời gian hết hạn</label>
-                    <input id="timeEditFrm" class="form-control" placeholder="Thời gian hết hạn" />
+                    <input id="timeEditFrm" type="date" class="form-control" placeholder="Thời gian hết hạn" />
                 </div>
 
                 <div class="row">
@@ -162,6 +175,10 @@
                                 <div class="form-group">
                                     <label>Công ty</label>
                                     <select id="emplIdEditFrm" class="form-control">
+                                        @foreach (Employer e in ViewBag.listEmployer)
+                                        {
+                                            <option value="@e.ID">@e.Company_Name</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -169,6 +186,10 @@
                                 <div class="form-group">
                                     <label>Kỹ năng cần thiết</label>
                                     <select id="skillIdEditFrm" class="form-control">
+                                        @foreach (Skill s in ViewBag.listSkill)
+                                        {
+                                            <option value="@s.ID">@s.Name</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -176,6 +197,10 @@
                                 <div class="form-group">
                                     <label>Địa điểm</label>
                                     <select id="locationIdEditFrm" class="form-control">
+                                        @foreach (Location l in ViewBag.listLocation)
+                                        {
+                                            <option value="@l.ID">@l.Name</option>
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -226,7 +251,7 @@
                         "data": "CompanyName", "name": "CompanyName"
                     },
                     {
-                        "data": "Salary","name": "Salary"
+                        "data": "Salary", "name": "Salary"
                     },
                     {
                         "data": "StringDate", "name": "Time"
@@ -237,7 +262,7 @@
                 "searching": false,
                 "lengthChange": false,
                 "autoWidth": false,
-                "filter": true,
+                "filter": false,
                 "info": false,
                 "language": {
                     emptyTable: "<li class='text-danger' align='center'>Không có dữ liệu</li>",
@@ -259,13 +284,109 @@
         });
     </script>
 
-    /////////////////////////////////////////////////EDIT//////////////////////////////////////////////////////
+    /////////////////////////////////////////////////SEARCH////////////////////////////////////////////////////
     <script>
         $(document).ready(function () {
-            $("#jobTable").on("click", ".JobID", function () {
-                var titleID = $(this).attr("name");
+            $("#searchBtn").click(function () {
+                $("#pre-load-layer").show();
+                $("#pre-load").show();
+                table.ajax.reload();
+                setTimeout(function () {
+                    $("#pre-load").hide();
+                    $("#pre-load-layer").hide();
+                }, 2000);
             });
-
         });
     </script>
+
+    ////////////////////////////////////////////////ADD////////////////////////////////////////////////////////
+    <script>
+        $(document).ready(function () {
+            $("#addBtn").click(function () {
+                $("#pre-load-layer").show();
+                $("#pre-load").show();
+                $.ajax({
+                    url: "/OnlineJobSearching/JobManagement/AddJob",
+                    type: "POST",
+                    datatype: "json",
+                    data: {
+                        "titleJob": function () { return $("#titleJobAddFrm").val(); },
+                        "shortdes": function () { return $("#shortDescAddFrm").val(); },
+                        "detail": function () { return $("#detailAddFrm").val(); },
+                        "salary": function () { return $("#salaryAddFrm").val(); },
+                        "time": function () { return $("#timeAddFrm").val(); },
+                        "emplID": function () { return $("#emplIdAddFrm").val(); },
+                        "skillID": function () { return $("#skillIdAddFrm").val(); },
+                        "locationID": function () { return $("#locationIdAddFrm").val(); }
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            successAlert(response.title, response.message);
+                            $("#pre-load").hide();
+                            $("#pre-load-layer").hide();
+                            table.ajax.reload();
+                            //exit modal
+                            $("#exitAddFrm").click();
+
+                        } else {
+                            errorAlert(response.title, response.message);
+                            $("#pre-load").hide();
+                            $("#pre-load-layer").hide();
+                            table.ajax.reload();
+                            $("#exitAddFrm").click();
+                        }
+                    },
+                    error: function (response) {
+                        $("#pre-load").hide();
+                        $("#pre-load-layer").hide();
+                        errorAlert(response.title, response.message);
+                    }
+                })
+            });
+        });
+    </script>
+
+
+
+    /////////////////////////////////////////////////EDIT//////////////////////////////////////////////////////
+    <script>
+        var jobID;
+        $(document).ready(function () {
+            $("#jobTable").on("click", ".JobID", function () {
+                jobID = $(this).attr("name");
+                getJobByID(jobID);
+            });
+        });
+
+    </script>
+
+    <script>
+        /////get job by id -> pass to input of edit modal/////
+        function getJobByID(jobID) {
+            $.ajax({
+                url: "/OnlineJobSearching/JobManagement/GetJobByID",
+                type: "POST",
+                datatype: "json",
+                data: {
+                    "jobID": jobID
+                },
+                success: function (response) {
+                    var jobByID = response.jobByID;
+                    $("#titleJobEditFrm").val(jobByID.Title);
+                    $("#shortDescEditFrm").val(jobByID.Short_Des);
+                    $("#detailEditFrm").val(jobByID.Detail);
+                    $("#salaryEditFrm").val(jobByID.Salary);
+                    $("#timeEditFrm").val(jobByID.Time);
+                    $("#emplIdEditFrm").val(jobByID.EmplID);
+                    $("#skillIdEditFrm").val(jobByID.SkillID);
+                    $("#locationIdEditFrm").val(jobByID.LocationID);
+                },
+                error: function (response) {
+
+                }
+            });
+        }
+    </script>
+
+
 }

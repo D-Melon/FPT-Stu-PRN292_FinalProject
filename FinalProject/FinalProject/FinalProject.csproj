@@ -260,6 +260,8 @@
     <Content Include="Views\Shared\_LayoutGuest.cshtml" />
     <Content Include="Views\Shared\_LayoutJobSeeker.cshtml" />
     <Content Include="Views\Admin\Job\ListJob.cshtml" />
+    <Content Include="Views\Jobseeker\DetailJob.cshtml" />
+    <Content Include="Views\Jobseeker\ListJob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
