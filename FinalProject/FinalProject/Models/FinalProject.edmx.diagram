@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b1ecca0d7c3e4b0dab153b9dcb7a0e63" Name="Diagram1">
+        <EntityTypeShape EntityType="FinalProjectModel.Act_Type" Width="1.5" PointX="3.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.Employer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.FbDetail" Width="1.5" PointX="9" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.Feedback" Width="1.5" PointX="11.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.Follow" Width="1.5" PointX="8.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.Job" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.Location" Width="1.5" PointX="1.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.Skill" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.sysdiagram" Width="1.5" PointX="5.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.User" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.User_Job" Width="1.5" PointX="8.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.User_rights" Width="1.5" PointX="6" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinalProjectModel.User_roles" Width="1.5" PointX="3.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="FinalProjectModel.FK_Employer_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK_Feedback_Employer" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK_Follow_Employer" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK_Job_Employer" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK_Feedback_Fb_Detail" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK_Feedback_User" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK_Follow_User" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK_Job_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK_Job_Skill" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK_User_Job_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK_User_Job_User" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK_User_User_roles" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.FK__User_righ__RoleI__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="FinalProjectModel.User_Skills" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
