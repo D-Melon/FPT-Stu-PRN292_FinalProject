@@ -262,6 +262,11 @@
     <Content Include="Views\Admin\Job\ListJob.cshtml" />
     <Content Include="Views\Jobseeker\DetailJob.cshtml" />
     <Content Include="Views\Jobseeker\ListJob.cshtml" />
+    <Content Include="Views\Guest\ListJob.cshtml" />
+    <Content Include="Views\Guest\DetailJob.cshtml" />
+    <Content Include="Views\Jobseeker\Apply.cshtml" />
+    <Content Include="Views\Jobseeker\Info.cshtml" />
+    <Content Include="Views\Jobseeker\ChangePass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
