@@ -43,6 +43,7 @@
                                 <th>Công ty</th>
                                 <th>Lương</th>
                                 <th>Thời gian hết hạn</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -165,7 +166,7 @@
                 </div>
                 <div class="form-group">
                     <label>Thời gian hết hạn</label>
-                    <input id="timeEditFrm" type="date" class="form-control" placeholder="Thời gian hết hạn" />
+                    <input id="timeEditFrm" type="text" class="form-control" placeholder="Thời gian hết hạn" />
                 </div>
 
                 <div class="row">
@@ -255,6 +256,11 @@
                     },
                     {
                         "data": "StringDate", "name": "Time"
+                    },
+                    {
+                        "data": "", "name": "", "render": function (data, type, row) {
+                            return "<a name=\"" + row["ID"] + "\" class=\"deleteJob btn btn-red\" >Xóa</a>"
+                        }
                     }
                 ],
                 "serverSide": "true",
@@ -354,32 +360,68 @@
         $(document).ready(function () {
             $("#jobTable").on("click", ".JobID", function () {
                 jobID = $(this).attr("name");
-                getJobByID(jobID);
+                getJob(jobID);
             });
+        });
+
+        $("#updateBtn").click(function () {
+            var job = {
+                jobID: jobID,
+                jobTitle: $("#titleJobEditFrm").val(),
+                jobShortDes: $("#shortDescEditFrm").val(),
+                jobDetail: $("#detailEditFrm").val(),
+                jobSalary: $("#salaryEditFrm").val(),
+                jobTime: $("#timeEditFrm").val(),
+                jobEmplID: $("#emplIdEditFrm").val(),
+                jobSkillID: $("#skillIdEditFrm").val(),
+                jobLocationID: $("#locationIdEditFrm").val()
+            };
+
+            $.ajax({
+                url: "/OnlineJobSearching/JobManagement/updateJob",
+                type: "POST",
+                datatype: "json",
+                data: {
+                    "job": JSON.stringify(job)
+                },
+                success: function (response) {
+                    if (response.success) {
+                        successAlert(response.title, response.message);
+                        table.ajax.reload();
+                    }
+                },
+                error: function (response) {
+                    errorAlert(response.title, response.message);
+                    table.ajax.reload();
+                }
+            })
+
         });
 
     </script>
 
     <script>
         /////get job by id -> pass to input of edit modal/////
-        function getJobByID(jobID) {
+        function getJob(jobID) {
             $.ajax({
-                url: "/OnlineJobSearching/JobManagement/GetJobByID",
-                type: "POST",
+                url: "/OnlineJobSearching/JobManagement/getJobByID",
+                type: "GET",
                 datatype: "json",
                 data: {
                     "jobID": jobID
                 },
                 success: function (response) {
-                    var jobByID = response.jobByID;
-                    $("#titleJobEditFrm").val(jobByID.Title);
-                    $("#shortDescEditFrm").val(jobByID.Short_Des);
-                    $("#detailEditFrm").val(jobByID.Detail);
-                    $("#salaryEditFrm").val(jobByID.Salary);
-                    $("#timeEditFrm").val(jobByID.Time);
-                    $("#emplIdEditFrm").val(jobByID.EmplID);
-                    $("#skillIdEditFrm").val(jobByID.SkillID);
-                    $("#locationIdEditFrm").val(jobByID.LocationID);
+                    if (response.success) {
+                        var jobByID = response.jobByID;
+                        $("#titleJobEditFrm").val(jobByID.Title);
+                        $("#shortDescEditFrm").val(jobByID.Short_Des);
+                        $("#detailEditFrm").val(jobByID.Detail);
+                        $("#salaryEditFrm").val(jobByID.Salary);
+                        $("#timeEditFrm").val(jobByID.StringDate);
+                        $("#emplIdEditFrm").val(jobByID.EmpID);
+                        $("#skillIdEditFrm").val(jobByID.SkillID);
+                        $("#locationIdEditFrm").val(jobByID.LocationID);
+                    }
                 },
                 error: function (response) {
 
@@ -388,5 +430,39 @@
         }
     </script>
 
+
+    /////////////////////////////////DELETE////////////////////////////////////////
+    <script>
+        $(document).ready(function () {
+            var jobID;
+            $("#jobTable").on("click", ".deleteJob", function () {
+                jobID = $(this).attr("name");
+                confirmAlert("Xóa", "Xác nhận xóa công việc?", function () {
+                    deleteJob(jobID);
+                });
+            });
+        });
+    </script>
+
+    <script>
+        function deleteJob(jobID) {
+            $.ajax({
+                url: "/OnlineJobSearching/JobManagement/deleteJob",
+                type: "POST",
+                datatype: "json",
+                data: {
+                    "jobID": jobID
+                },
+                success: function (response) {
+                    successAlert(response.title, response.message);
+                    table.ajax.reload();
+                },
+                error: function (response) {
+                    errorAlert(response.title, response.message);
+                    table.ajax.reload();
+                }
+            });
+        }
+    </script>
 
 }
