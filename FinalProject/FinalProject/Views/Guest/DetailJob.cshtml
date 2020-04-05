@@ -1,8 +1,10 @@
 ﻿
 @{
     ViewBag.Title = "DetailJob";
-    Layout = "~/Views/Shared/_LayoutJobSeeker.cshtml";
+    Layout = "~/Views/Shared/_LayoutGuest.cshtml";
 }
+
+
 <link href="~/css/jobseeker.css" rel="stylesheet" />
 
 <div class="job-detail-block">
@@ -11,11 +13,9 @@
             <div class="job-above">
                 <p class="job-title">@ViewBag.job.Title</p>
                 <p class="job-skill">@ViewBag.job.SkillName</p>
-                <p class="job-salary"><i class="fas fa-dollar-sign"></i> Salary : @ViewBag.job.Salary</p>
                 <p class="job-address"><i class="fas fa-map-marker-alt"></i> @ViewBag.job.LocationName</p>
                 <p class="job-createdDate"><i class="far fa-clock"></i> @ViewBag.job.StringDate</p>
-                <p class="job-salary"><i class="fas fa-dollar-sign"></i> @ViewBag.job.Salary</p>
-
+                <span style="color:red">You must login to see the salary</span>
             </div>
         </div>
         <div class="col-sm-12">
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="col-sm-12">
-            <a href="/OnlineJobSearching/Jobseeker/Apply?jobid=@ViewBag.job.ID" class="btn btn-block btn-danger btn-lg">Apply Now</a>
+            <a href="" class="btn btn-block btn-danger btn-lg">Apply Now</a>
         </div>
     </div>
 

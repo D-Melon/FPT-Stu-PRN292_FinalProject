@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Apply";
+    Layout = "~/Views/Shared/_LayoutJobSeeker.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h1 class="list-company">Nhập thông tin apply</h1>
+    </div>
+</div>
+<div class="row">
+    <form action="../Jobseeker/ApplyDone" method="post">
+        <div class="col-md-12">
+            <b>Đính kèm CV <span class="require-field">(*)</span></b>
+        </div>
+
+        <div class="col-xs-6 ">
+            <input type="file" id="real-file" hidden="hidden" name="real" /> <span id="custom-text">Chưa có file nào được chọn</span>
+        </div>
+        <div class="col-xs-4 ">
+            <div class="fjs-btn green add-to-list">
+                <button type="button" id="custom-button" class="btn btn-success"><i class="fa fa-upload"></i> &nbsp;Chọn file</button>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <input type="hidden" name="jobid" value="@ViewBag.jobid"/>
+        </div>
+        <div class="col-sm-12" style="margin-top:30px">
+            <h3 style="color:red">@ViewData["Notification"]</h3>
+            <button type="submit" class="btn btn-danger">Apply</button>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script>
+        const realFileBtn = document.getElementById("real-file");
+        const customBtn = document.getElementById("custom-button");
+        const customTxt = document.getElementById("custom-text");
+
+        customBtn.addEventListener("click", function () {
+            realFileBtn.click();
+        });
+
+        realFileBtn.addEventListener("change", function () {
+            if (realFileBtn.value) {
+                customTxt.innerHTML = realFileBtn.value.match(
+                    /[\/\\]([\w\d\s\.\-\(\)]+)$/
+                )[1];
+            } else {
+                customTxt.innerHTML = "Chưa có file nào được chọn";
+            }
+        });
+    </script>
+}
+
+
+
