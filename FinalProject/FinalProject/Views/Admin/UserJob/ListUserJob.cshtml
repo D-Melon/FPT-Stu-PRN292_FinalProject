@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "ListUserJob";
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+}
+
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            <div>
+                <h2 class="text-center">
+                    <b>QUẢN LÝ DANH SÁCH ĐĂNG KÍ CÔNG VIỆC</b>
+                </h2>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <table id="jobTable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Họ và tên</th>
+                                <th>Email</th>
+                                <th>Tên công việc</th>
+                                <th>Công ty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    ////////////////////////////////////////////TABLE/////////////////////////////////////////////
+    <script>
+        var table;
+        $(document).ready(function () {
+            $("#pre-load-layer").show();
+            $("#pre-load").show();
+            table = $("#jobTable").DataTable({
+                "ajax": {
+                    "url": "/OnlineJobSearching/UserJob/ListUserJob",
+                    "type": "POST",
+                    "datatype": "json",
+                    "cache": "false",
+                    "dataSrc": function (json) {
+                        return json["listData"];
+                    }
+                },
+                "columns": [
+                    { "data": "ID", "name": "ID" },
+                    { "data": "Username", "name": "Username" },
+                    { "data": "Name", "name": "Name" },
+                    { "data": "Email", "name": "Email" },
+                    { "data": "Title", "name": "Title" },
+                    { "data": "Company_Name", "name": "Company_Name" },
+                ],
+                "serverSide": "true",
+                "order": [0, "asc"],
+                "searching": false,
+                "lengthChange": false,
+                "autoWidth": false,
+                "filter": true,
+                "info": false,
+                "language": {
+                    emptyTable: "<li class='text-danger' align='center'>Không có dữ liệu</li>",
+                    paginate:
+                    {
+                        previous: "Trang trước",
+                        next: "Trang sau",
+                        first: "|<",
+                        last: ">|"
+                    }
+                },
+                "initComplete": function (settings, json) {
+                    setTimeout(function () {
+                        $("#pre-load").hide();
+                        $("#pre-load-layer").hide();
+                    }, 2000);
+                }
+            })
+        });
+    </script>
+
+    /////////////////////////////////////////////////EDIT//////////////////////////////////////////////////////
+    <script>
+        $(document).ready(function () {
+            $("#jobTable").on("click", ".JobID", function () {
+                var titleID = $(this).attr("name");
+            });
+
+        });
+    </script>
+}

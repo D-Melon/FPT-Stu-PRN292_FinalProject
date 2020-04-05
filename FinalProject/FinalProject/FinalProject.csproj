@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Admin\AccountManagementController.cs" />
     <Compile Include="Controllers\Admin\JobManagementController.cs" />
+    <Compile Include="Controllers\Admin\UserJobController.cs" />
     <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\JobseekerController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -258,11 +259,13 @@
     <Content Include="Views\Jobseeker\Apply.cshtml" />
     <Content Include="Views\Jobseeker\Info.cshtml" />
     <Content Include="Views\Jobseeker\ChangePass.cshtml" />
+    <Content Include="Views\Admin\UserJob\ListUserJob.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Admin\Employer\" />
     <Folder Include="Views\JobManager\" />
+    <Folder Include="Views\UserJob\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
