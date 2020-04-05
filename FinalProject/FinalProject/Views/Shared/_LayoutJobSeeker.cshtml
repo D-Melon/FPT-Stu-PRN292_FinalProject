@@ -31,7 +31,7 @@
                     <li>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-target="">Hello @ViewBag.name</a>
                         <div class="dropdown-menu box-option" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Thông tin tài khoản</a><br />
+                            <a class="dropdown-item" href="/OnlineJobSearching/Jobseeker/Info">Thông tin tài khoản</a><br />
                             <a class="dropdown-item" href="/OnlineJobSearching/Login/Logout" style="color:red">Đăng xuất</a>
                         </div>
                     </li>
@@ -41,10 +41,8 @@
     </div>
     <div class="container body-content" style="min-height:100vh">
         @RenderBody()
-        <hr />
-
     </div>
-    <div class="container-fluid" style="padding:0px">
+    <div class="container-fluid" style="padding:0px;margin-top:30px;">
         <footer class="page-footer font-small blue pt-4 text-white footer">
             <!-- Footer Links -->
             <div class="container-fluid text-center text-md-left">

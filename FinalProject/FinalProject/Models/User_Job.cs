@@ -17,9 +17,8 @@ namespace FinalProject.Models
         public int ID { get; set; }
         public int JobID { get; set; }
         public int JskID { get; set; }
-        public int TypeID { get; set; }
+        public string CV { get; set; }
     
-        public virtual Act_Type Act_Type { get; set; }
         public virtual Job Job { get; set; }
         public virtual User User { get; set; }
     }

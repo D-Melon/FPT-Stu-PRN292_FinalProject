@@ -128,3 +128,8 @@ textarea {
     .box-option a {
         color: #303030;
     }
+
+/*Css for upload file*/
+#real-file {
+    display: none;
+}
